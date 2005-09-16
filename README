@@ -1,0 +1,34 @@
+$Id:  $
+
+PDF::APIx::Layout
+
+There seem to be a growing plethora of Perl modules for creating and
+manipulating PDF files.
+
+This module will be an "Advanved Usage Pattern" for PDF::API2.
+
+
+FEATURES
+
+tbd.
+
+
+REQUIREMENTS
+
+This module set requires you to have installed the following other perl modules:
+
+    Module      Required for
+    ------------------------------------------------------
+    Compress::Zlib   - Compression of PDF object streams
+    PDF::API2        - obviously
+    perl >= 5.8.0
+
+
+NOTES
+
+This module is currently very very very very very very very very very very alpha.
+
+
+CHANGES
+
+tbd.

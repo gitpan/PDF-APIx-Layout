@@ -1,0 +1,11 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         PDF-APIx-Layout
+version:      0.00_001
+version_from: version.pmf
+installdirs:  site
+requires:
+    PDF::API2:                     0.46
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.17

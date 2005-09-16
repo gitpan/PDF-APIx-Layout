@@ -1,0 +1,23 @@
+AUTHORS
+CONTACT
+COPYING
+examples/0x0_layout
+examples/0x0_layout.pdf
+INSTALL
+LICENSE
+Makefile.PL
+MANIFEST
+README
+TODO
+VERSION
+version.pmf
+lib/PDF/APIx/Layout/BasicGrid.pm
+lib/PDF/APIx/Layout/FixedGrid.pm
+lib/PDF/APIx/Layout/FixedText.pm
+lib/PDF/APIx/Layout/Image.pm
+lib/PDF/APIx/Layout/MarkupText.pm
+lib/PDF/APIx/Layout/Object.pm
+lib/PDF/APIx/Layout/RawTextObjects.pm
+lib/PDF/APIx/Layout/SimpleText.pm
+lib/PDF/APIx/Layout.pm
+META.yml                                 Module meta-data (added by MakeMaker)

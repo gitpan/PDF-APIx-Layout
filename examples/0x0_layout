@@ -1,0 +1,459 @@
+#!/usr/bin/perl
+#=======================================================================
+#    ____  ____  _____           _                            _
+#   |  _ \|  _ \|  ___|  _   _  | |    __ _ _   _  ___  _   _| |_
+#   | |_) | | | | |_    (_) (_) | |   / _` | | | |/ _ \| | | | __|
+#   |  __/| |_| |  _|    _   _  | |__| (_| | |_| | (_) | |_| | |_
+#   |_|   |____/|_|     (_) (_) |_____\__,_|\__, |\___/ \__,_|\__|
+#                                           |___/
+#
+#   A Perl Module Chain to faciliate Layouts for PDF::API2.
+#
+#   Copyright 1999-2005 Alfred Reibenschuh <areibens@cpan.org>.
+#
+#=======================================================================
+#
+#   PERMISSION TO USE, COPY, MODIFY, AND DISTRIBUTE THIS FILE FOR
+#   ANY PURPOSE WITH OR WITHOUT FEE IS HEREBY GRANTED, PROVIDED THAT
+#   THE ABOVE COPYRIGHT NOTICE AND THIS PERMISSION NOTICE APPEAR IN ALL
+#   COPIES.
+#
+#   THIS FILE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+#   WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+#   IN NO EVENT SHALL THE AUTHORS AND COPYRIGHT HOLDERS AND THEIR
+#   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+#   USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+#   ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+#   OF THE USE OF THIS FILE, EVEN IF ADVISED OF THE POSSIBILITY OF
+#   SUCH DAMAGE.
+#
+#   $Id: $
+#
+#=======================================================================
+
+use lib '../lib';
+use PDF::API2;
+use PDF::API2::Util;
+use PDF::APIx::Layout;
+use Data::Dumper;
+
+$text=qq[Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim adet minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum fred dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odiodignissim quised blandit praesent luptatum zzril delenit jhu augue duis dolore te feugait nulla facilisi.];
+$text2=qq[Ni tega tece iko. Ubo on lana genni imaji. Kun imagi panni apona vi, te imi sane tece upeda. Pe dite denda imaji ika? Ato zu dubi tana randa!
+Cai kini purojen ma, men ni lana udena, puo akizu akama kasin zn. Ma zame universita vin, ban ri iraga urazo perinda, fuga jaben don si! Alkohol aletayo zu ipa, du mon geru line jesio. On irida sucon likada men, bar ceika pecin isidio mi. Ika isidio vedaya pazocan tu!
+Ena genni hukate co, zote ninna meseda pin in. Pe bosu gala fin, pin pe hagen anitayo. Unuda unilio ni ena, din undan imaji hegio ta. Nuda zivio foline in iro, zin je tana lukaca. Ureli unama decen ila si, cagun ugevio utegin zi ipa.
+Hu uga amio makan alkohol, hori amubi pe ubo! Je goyo pani tareyo ipe, puro gadio meseda in men, via te gase makan mandi. Aruka irida ili si, dulo gasin asekio ni ura? Tu con naui zali. Izo bona poli rici je, ura goyo tenka on, di pin xinte tareyo!
+Co duna bengin mon. Tu apa xolu manze unaua. Xinte akizu hagen men ta, kin kora duna utegin ni? Tu iro gase jisada, on kayo suhum itani iro, sun muro apona udena mi. Ite huka randa ta?
+Amio hegi udeba din pe, para zote cai di, game suko gisone izo si? Cagun igoyo kipaci vio zu? Hamen berojen on vio, kun hori amulio ri? Pe upive jaben ena, pe ipe bosu vadiri, kon lango xannin di.
+Indan gesini pazocan ite on, zi kidon apona ena? Pe inri juvio hegio pin. Mane dubi lire ubo ne? Uga vi xolu unuda azucio, jesio uzoni panni fin mi. Universita isuje adeya ika zu, zn para unuda urevio ena. Ena cigi imagi zn, tu ena rete unilio royale, hu hori itoni kozan uga! Ite isuje kinyaraji zi.
+Ite veca juda mendi ri, xau hegi soyu zu. Ubo ta bosu suko, geru inada bar co. Kidon velen ani pe, sen apona imaji ikibani pe. Zi noci ziri denda ilu, aga pe para gadio. Fin dubi siui zali te, kin kuce tolen gadio vi. Din hinne makan zu, con kasin hisatori ri, ire fada xinte hagen tu.
+On naui caya fin, cai te sucan ikuxin dilakada, ne ruba vema udeba dun? Ika aniten atarenda du? Pin ne zoro iraxin adusinyo, vanyo conba ura te? Hori utegin cokolat vi vin, ban vi riko zenga agona, pe xau umma asina isuje. Tu abeyo kasin hukate men, si pecin inada lakana imi, iko zaga azucio je. Dulo zivio fin mi, upive sucan kinyo on via!
+Tu kin huka lire lasin? Vio pe xinte inada. Kon ta keni runci tolen, cina uaci dulo te hin. Zn pin gala dilakada? Ma ubo naui pontane, kin co zina zali imusenyo. Asina vadiri ubo zi, si naui gula urekada tan.
+Di juda kayo azucio fin! Feyo cobi busana men ni, con sane boro pontane ni! Ena iseda isuje akali vi, conba kayasada co aci? Vin gasin adeya ta, je iku hori adani berove!
+Iro ne unadi sucon mesenyo! Kuce kinyaraji in con, zoro unilio aletayo don ni? Zi ena amio vedaya? Ubo tu hori gadio berogin. Ipe pe nili unya lasin, coni anala ubeni con mi. Sane zote dilakada hun mi, je ine caya veca feyo.
+Ipe mi cigi vedaya kizinda, te hamen zumeni finyuri aga, umma udena sir du! Lindi akama azucio mi vio, je ume tenka karune, ino ri poru randa lindi? Co pila supa uga, gula riko ume vi? Hu fin imagi lakana, muro ilocio ta ine, ne abu zoru zadi tane.
+Udara imusenyo ipa zn, decen paxuna zi uga. Ma iku bona upeda atasada, ni supa finyuri sir. Si izo danya gisone, veca geru utegin tu uga. Don supa urene si? Iko si tebin gelen karune. Puo hegi ugevio zi, pana kayasada ubo ma, ni kuna soyu pin?
+Hu pani bandi ila, kiru adda genni ume ne. Ena sane indan ma. Si tan nuda likada, aci kidon kipaci vi. Ika zu vema kini malen, fin teka utila zu.
+Pin zoro pecin berojen in, mi teka umidi kon, vanyo fonograf ri pin. Hala zadiri te iku, co illan hegio vio. Ceba codo si abu. Kun mi akizu ugoba, tan pe suko amubi? Vadiri finyuri ika du. Si moko sucan udeni sen, muga malen paimoda co jio, ite ma vari suhum!
+Mon mi mate muga pari, purojen dilakada puo hu. Je sen zoru aguni adeya, vanyo hukate pazocan ani vi. Mi coni heri tebin vio, zu gula ilebi inada sun! Co heri lire atasada ura.
+];
+
+%fonts=();
+@fontnames=qw[Helvetica Verdana Trebuchet Times-Roman Georgia];
+
+$pdf=PDF::API2->new;
+
+foreach my $name (@fontnames)
+{
+    $fonts{$name}=$pdf->corefont($name,-encode=>'latin1');
+}
+$f1=$fonts{'Verdana'};
+$f2=$fonts{'Georgia'};
+
+###############################################################################
+#
+# SimpleText TEST
+#
+###############################################################################
+
+#$textCell=PDF::APIx::Layout->SimpleText(
+#	$f1,8,$text,
+#	-background=>'#ff8',
+#	-border=>2, 
+#	-bordercolor=>'blue',
+#	-borderdash=>[2,3,4,5],
+#	-lead=>1.3, 
+#	-textcolor=>['darkred'],
+#);
+#
+#$textCell2=PDF::APIx::Layout->SimpleText(
+#	$f1,8,$text,
+#	-background=>'#00f',
+#	-lead=>1.3, 
+##	-paddingtop=>20,
+##	-paddingbottom=>20,
+#	-textcolor=>['white'],
+#	-align=>'r',
+#);
+#
+#$textCell3=PDF::APIx::Layout->SimpleText(
+#	$f1,8,$text,
+#	-lead=>1.3, 
+##	-paddingleft=>20,
+##	-paddingright=>20,
+#	-textcolor=>['darkgreen'],
+#	-underline=>'simple',
+#	-bordertop=>2,
+#	-bordertopcolor=>'red',
+#	-background=>'#fff',
+#	-align=>'j',
+#);
+#
+#$i=1;
+#foreach my $wd ($textCell->minWidth()..600)
+###foreach my $wd (150)
+#{
+#    $w=50;
+#    $page=$pdf->page;
+#    $gfx=$page->gfx;
+#    $textCell->{-id}="this$i";
+#    # $textCell->{-href}="http://127.0.0.1/";
+#    $textCell2->{-href}="#this".($i-1);
+#    $textCell->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell->heightByWidth($wd));
+#    $gfx=$page->gfx;
+#    $w+=$wd;
+#    $textCell2->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell2->heightByWidth($wd));
+#    $gfx=$page->gfx;
+#    $w+=$wd;
+#    $textCell3->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell3->heightByWidth($wd));
+#    $i++;
+#    $w+=$wd+50;
+#    $page->mediabox($w,$textCell->heightByWidth($wd)+100);
+#}
+#
+foreach my $name (@fontnames)
+{
+    foreach my $be (1,1.1,1.2,1.3,1.4,1.5,1.6)
+    {
+	$textCell=PDF::APIx::Layout->SimpleText(
+		$fonts{$name},10,$text,
+		-margin=>5,
+		-padding=>7,
+		-background=>'#ff8',
+		-border=>2, 
+		-bordercolor=>'blue',
+		-borderdash=>[2,3,4,5],
+		-lead=>1.3, 
+		-textcolor=>['darkred'],
+		-blockexpand=>$be,
+	);
+
+	$textCell2=PDF::APIx::Layout->SimpleText(
+		$fonts{$name},10,$text,
+		-margin=>5,
+		-padding=>7,
+		-background=>'#00f',
+		-lead=>1.3, 
+		-textcolor=>['white'],
+		-align=>'r',
+		-blockexpand=>$be,
+		## -background-transparency=>0.2,
+	);
+
+	$textCell3=PDF::APIx::Layout->SimpleText(
+		$fonts{$name},10,$text,
+		-margin=>5,
+		-padding=>7,
+		-lead=>1.3, 
+		-textcolor=>['darkgreen'],
+		-underline=>'simple',
+		-bordertop=>2,
+		-bordertopcolor=>'red',
+		-borderbottom=>0.1,
+		-borderbottomcolor=>'black',
+		-background=>'#fff',
+		-align=>'j',
+		-blockexpand=>$be,
+	);
+
+	$textCell4=PDF::APIx::Layout->SimpleText(
+		$fonts{$name},10,$text,
+		-margin=>5,
+		-padding=>7,
+		-lead=>1.3, 
+		-textcolor=>['cyan'],
+		-background=>'#88f',
+		-border=>2,
+		-bordercolor=>'yellow',
+		-align=>'c',
+		-blockexpand=>$be,
+	);
+
+	my $wd=495/3; #
+	$w=50;
+	$page=$pdf->page;
+	$gfx=$page->gfx;
+	$gfx->textlabel($w,$textCell->heightByWidth($wd)+70,$f1,10,"font='$name' exp='$be'",-hspace=>90);
+
+	$textCell->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell3->heightByWidth($wd));
+	$w+=$wd;
+
+	$textCell2->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell3->heightByWidth($wd));
+	$w+=$wd;
+
+	$textCell3->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell3->heightByWidth($wd));
+	$w+=$wd;
+
+	$textCell4->render($pdf,$page,$gfx,$w,$textCell->heightByWidth($wd)+50,$wd,$textCell3->heightByWidth($wd));
+	$w+=$wd+50;
+
+	$page->mediabox($w,$textCell->heightByWidth($wd)+100);
+    }
+}
+
+###############################################################################
+#
+# XML TEST
+#
+###############################################################################
+
+$xml=<<EOT;
+<p size="15"><a href="http://127.0.0.1/">[HREF]</a> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+sed diam nonummy <a id="here">nibhed euismod</a> tincidunt ut laoreet 
+dolore magna aliquam <b>erat volutpat. <e>Ut wisi enim adet</e> 
+minim veniam, <span color="red">quis nostrud exerci</span> tation ullamcorper 
+suscipit lobortis nisl <c>ut aliquip ex ea commodo consequat.</c> 
+Duis autem vel eum </b>iriure dolor in hendrerit in vulputate 
+velit <span face="verdana">esse &emdash; molestie &emdash; <u>consequat, vel illum</u> fred dolore eu 
+feugiat nulla facilisis at vero eros et</span> accumsan et iusto 
+odiodignissim quised blandit praesent luptatum zzril 
+delenit jhu augue duis dolore te feugait <sup size="8">nulla</sup> facilisi. <span face="arial"><b>&amp; &gt; &lt; <i>&#254; &lozenge;</i> <sub>&AE;</sub> <sup>&ae;</sup></b></span></p>
+EOT
+
+$xml2=<<EOT;
+<p size="15"><a href="http://127.0.0.1/">[HREF] </a>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam <b>erat volutpat. <e>Ut wisi enim adet </e>minim veniam, <span color="red">quis nostrud exerci </span>tation ullamcorper suscipit lobortis nisl <c>ut aliquip ex ea commodo consequat. </c>Duis autem vel eum </b>iriure dolor in hendrerit in vulputate  velit <span face="verdana">esse &emdash; molestie &emdash; <u>consequat, vel illum </u>fred dolore eu feugiat nulla facilisis at vero eros et </span>accumsan et iusto odiodignissim quised blandit praesent luptatum zzril delenit jhu augue <a href="#here">duis dolore te feugait </a><sup size="8">nulla </sup>facilisi. <b>&amp; &gt; &lt; <i>&#254; &lozenge; </i><sub>&AE; </sub><sup>&ae; </sup></b></p>
+EOT
+
+$xml=~s|\s+\n+| |g;
+$xml=~s|\s+| |g;
+$xml2=~s|\s+\n+| |g;
+$xml2=~s|\s+| |g;
+
+$freg=[];
+
+$tr=$pdf->corefont('Times-Roman',-encode=>'latin1');
+$tb=$pdf->corefont('Times-Bold',-encode=>'latin1');
+$ti=$pdf->corefont('Times-Italic',-encode=>'latin1');
+$tz=$pdf->corefont('Times-BoldItalic',-encode=>'latin1');
+
+push @{$freg}, [$tr,'times','regular','regular'];
+push @{$freg}, [$tb,'times','bold','regular'];
+push @{$freg}, [$ti,'times','regular','italic'];
+push @{$freg}, [$tz,'times','bold','regular'];
+
+$hr=$pdf->corefont('Helvetica',-encode=>'latin1');
+$hb=$pdf->corefont('Helvetica-Bold',-encode=>'latin1');
+$hi=$pdf->corefont('Helvetica-Oblique',-encode=>'latin1');
+$hz=$pdf->corefont('Helvetica-BoldOblique',-encode=>'latin1');
+
+push @{$freg}, [$hr,'helvetica','regular','regular'];
+push @{$freg}, [$hb,'helvetica','bold','regular'];
+push @{$freg}, [$hi,'helvetica','regular','italic'];
+push @{$freg}, [$hz,'helvetica','bold','regular'];
+
+$vr=$pdf->corefont('Verdana',-encode=>'latin1');
+$vb=$pdf->corefont('Verdana,Bold',-encode=>'latin1');
+$vi=$pdf->corefont('Verdana,Italic',-encode=>'latin1');
+$vz=$pdf->corefont('Verdana,BoldItalic',-encode=>'latin1');
+
+push @{$freg}, [$vr,'verdana','regular','regular'];
+push @{$freg}, [$vb,'verdana','bold','regular'];
+push @{$freg}, [$vi,'verdana','regular','italic'];
+push @{$freg}, [$vz,'verdana','bold','regular'];
+
+#$ar=$pdf->ttfont('c:/windows/fonts/arialuni.ttf',-encode=>'latin1',-nosubset=>1);
+
+$utr=$pdf->unifont($vr,[$tr,0],-encode=>'latin1');
+$utb=$pdf->unifont($vr,[$tb,0],-encode=>'latin1');
+$uti=$pdf->unifont($vr,[$ti,0],-encode=>'latin1');
+$utz=$pdf->unifont($vr,[$tz,0],-encode=>'latin1');
+
+push @{$freg}, [$utr,'default'];
+
+$xmlCell1=PDF::APIx::Layout->MarkupText(
+	$xml,
+	-fontreg=>$freg,
+	-margin=>5,
+	-padding=>7,
+	-lead=>1.3,
+	-background=>'#aff',
+);
+
+$xmlCell2=PDF::APIx::Layout->MarkupText(
+	$xml2,
+	-fontreg=>$freg,
+	-margin=>5,
+	-padding=>7,
+	-lead=>1.3,
+	-align=>'j',
+	-background=>'#ffa',
+);
+
+foreach my $wd (250)
+{
+    my $w=50;
+    $page=$pdf->page;
+    $gfx=$page->gfx;
+    $xmlCell1->render($pdf,$page,$gfx,$w,450,$wd,$xmlCell1->heightByWidth($wd));
+    $w+=$wd;
+    $xmlCell2->render($pdf,$page,$gfx,$w,450,$wd,$xmlCell2->heightByWidth($wd));
+    $w+=$wd+50;
+    $page->mediabox($w,500);
+}
+
+###############################################################################
+#
+# SimpleText TEST with Lorem(Sona) Paragraphs
+#
+###############################################################################
+
+$textCell=PDF::APIx::Layout->SimpleText(
+	$f2,12,$text2,
+	-margin=>50,
+	-padding=>10,
+	-lead=>1.3, 
+	-textcolor=>['black'],
+	-bordertop=>2,
+	-bordertopcolor=>'red',
+	-borderbottom=>0.1,
+	-borderbottomcolor=>'black',
+	-align=>'j',
+);
+
+$page=$pdf->page;
+$page->mediabox(595,842);
+$gfx=$page->gfx;
+$textCell->render($pdf,$page,$gfx,0,842,595,842);
+
+###############################################################################
+#
+# BasicGrid TEST
+#
+###############################################################################
+
+$gridCell=PDF::APIx::Layout->BasicGrid(
+	-margin=>50,
+	-padding=>10,
+	-border=>2,
+	-bordercolor=>'red',
+);
+
+$textCell=PDF::APIx::Layout->SimpleText(
+	$f2,12,$text2,
+	-lead=>1.3, 
+	-textcolor=>['black'],
+	-align=>'j',
+	-border=>1,
+	-bordercolor=>'black',
+);
+
+$textCell2=PDF::APIx::Layout->FixedText(
+	$f2,8,qq[help\nthis\ntext],
+	-lead=>1.3, 
+	-textcolor=>['black'],
+	-align=>'j',
+	-border=>1,
+	-bordercolor=>'blue',
+	-padding=>5,
+);
+
+
+$page=$pdf->page;
+$gfx=$page->gfx;
+
+$textCell->{-colspan}=2;
+$textCell->{-rowspan}=2;
+$xmlCell1->{-rowspan}=3;
+
+$gridCell->addRow($textCell2,$textCell, undef, $xmlCell1, $xmlCell2);
+$gridCell->addRow($textCell2,undef, undef, undef, $textCell);
+$gridCell->addRow($textCell2,$xmlCell1, $xmlCell2, undef, undef);
+
+my $th=$gridCell->heightByWidth(1684);
+#
+##print Dumper($th,$gridCell->{-rowdata},$gridCell->{-coldata});
+
+$gridCell->render($pdf,$page,$gfx,0,$th,1684,$th);
+$page->mediabox(1684,$th);
+
+
+##my $th=$gridCell->heightByWidth(842);
+##
+##print Dumper($th,$gridCell->{-rowdata},$gridCell->{-coldata});
+
+while($gridCell)
+{
+    $page=$pdf->page;
+    $page->mediabox(842,595);
+    $gfx=$page->gfx;
+    $gridCell=$gridCell->render($pdf,$page,$gfx,0,592,842,592);
+}
+
+###############################################################################
+#
+# FixedGrid TEST
+#
+###############################################################################
+$gridCell=PDF::APIx::Layout->FixedGrid(
+	[50,250,250,250,250],
+	-margin=>50,
+	-padding=>0,
+);
+
+$gridCell->addRow($textCell2,$textCell, undef, $xmlCell1, $xmlCell2);
+$gridCell->addRow($textCell2,undef, undef, undef, $textCell);
+$gridCell->addRow($textCell2,$xmlCell1, $xmlCell2, undef, undef);
+
+$gridCell2=$gridCell;
+
+while($gridCell2)
+{
+    $page=$pdf->page;
+    $page->mediabox(1150,700);
+    $gfx=$page->gfx;
+    $gridCell2=$gridCell2->render($pdf,$page,$gfx,0,700,1150,700);
+}
+
+
+###############################################################################
+#
+# FixedGrid TEST 2
+#
+###############################################################################
+$gridCell=PDF::APIx::Layout->FixedGrid(
+	[50,300,300,300,300],
+	-margin=>50,
+	-padding=>0,
+);
+
+$gridCell->addRow($textCell2,$textCell, undef, $xmlCell1, $xmlCell2);
+$gridCell->addRow($textCell2,undef, undef, undef, $textCell);
+$gridCell->addRow($textCell2,$xmlCell1, $xmlCell2, undef, undef);
+
+$gridCell2=$gridCell;
+
+while($gridCell2)
+{
+    $page=$pdf->page;
+    $page->mediabox(1350,800);
+    $gfx=$page->gfx;
+    $gridCell2=$gridCell2->render($pdf,$page,$gfx,0,800,1350,800);
+}
+
+$pdf->saveas("$0.pdf");
+$pdf->end();
+
+__END__
